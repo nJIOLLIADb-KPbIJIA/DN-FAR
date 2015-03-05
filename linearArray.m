@@ -6,17 +6,20 @@ maxAlphaDeg = 90;
 N = 50; % number of elements
 d = 2;% between elements
 lambda = 1/d; % length of wave
-omega = 2*pi*299792458/lambda;
+%omega = 2*pi*299792458/lambda;
 A = 1; % amplitude
-alphaP = alphaPDeg/180*pi;
+stepByAlpha = 0.5;
 
-for alphaDeg = -maxAlphaDeg : maxAlphaDeg
-    index = alphaDeg+maxAlphaDeg+1;
-    Y(index) = 0;
+alphaP = alphaPDeg/180*pi;
+i = 0;
+for alphaDeg = -maxAlphaDeg : stepByAlpha : maxAlphaDeg
+    %alphaDeg
+    i = i + 1;
+    Y(i) = 0;
     alpha = alphaDeg/180*pi;
-    for n = 1 : N
-        Y(index) = Y(index) + A*exp(j*(2*pi*n*d*(sin(alphaP)-sin(alpha))));
+    for n = -N/2 : N/2 - 1
+        Y(i) = Y(i) + A*exp(j*2*pi*n*d*(sin(alphaP)-sin(alpha)));
     end
 end
-plot([-maxAlphaDeg:maxAlphaDeg], abs(Y))
+plot([-maxAlphaDeg:stepByAlpha:maxAlphaDeg], real(Y))
 grid on
