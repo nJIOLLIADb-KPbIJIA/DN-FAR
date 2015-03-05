@@ -18,5 +18,5 @@ for alphaDeg = -maxAlphaDeg : maxAlphaDeg
         Y(index) = Y(index) + A*exp(j*(2*pi*n*d*(sin(alphaP)-sin(alpha))));
     end
 end
-plot([-maxAlphaDeg:maxAlphaDeg], abs(Y))
+plot([-maxAlphaDeg:maxAlphaDeg], real(Y))
 grid on
