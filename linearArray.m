@@ -1,4 +1,4 @@
-clear all
+clear all;
 %current angle of DN in degrees (from -maxAlphaDeg to maxAlphaDeg)
 alphaPDeg = 35; 
 %max angle of DN in degrees
