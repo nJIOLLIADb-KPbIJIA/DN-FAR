@@ -16,10 +16,13 @@ for alphaDeg = -maxAlphaDeg : stepByAlpha : maxAlphaDeg
     i = i + 1;
     Y(i) = 0;
     alpha = alphaDeg/180*pi;
+    %{
     for n = -N/2 : N/2 - 1
     %for n = 1 : N
         Y(i) = Y(i) + A*exp(j*2*pi*n*d*(sin(alphaP)-sin(alpha))/lambda);
     end
+    %}
+    Y(i) = A*linearDiagram(N, alpha, alphaP, d);
 end
 subplot(2,1,1);
 plot([-maxAlphaDeg:stepByAlpha:maxAlphaDeg], real(Y));
