@@ -1,4 +1,4 @@
-int t = 0;                    // Time var
+float t = 0;                    // Time var
 float mu = 398600;            //Gravity cnt
 float scale = 1;              //scale for plot
 track realBR = new track();   //Class of track
@@ -12,7 +12,10 @@ void setup()
 
 void draw()
 {
-  scale = float(s5);
+  text("T(minut)= "+2*3.14*sqrt(realBR.a*realBR.a*realBR.a/mu)/60,10,30);        // Period
+  if (millis()%100>20)
+  {t = t+float(millis()%100)/1000; }
+  
   sb1 = textrect(50, 50,80,25,s1,sb1,"a=");    //enter parametrs
   sb2 = textrect(50, 100,80,25,s2,sb2,"p=");
   sb3 = textrect(50, 150,80,25,s3,sb3,"i=");
@@ -21,11 +24,14 @@ void draw()
   
   realBR.a=float(s1);
   realBR.p=float(s2);
-  realBR.i=float(s3);
-  realBR.Om=float(s4);
+  realBR.i=float(s3)*3.14/180;
+  realBR.Om=float(s4)*3.14/180;
+  scale = float(s5);scale = float(s5);
   
   plot_drawXY(250,10,280,280,dots);
   plot_drawXZ(250,300,280,280,dots);
+  plot_pointXY(550,10,280,280,realBR.now(t));
+  plot_pointXZ(550,300,280,280,realBR.now(t));
 
 }
 

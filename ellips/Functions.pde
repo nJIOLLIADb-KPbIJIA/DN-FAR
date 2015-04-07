@@ -28,8 +28,24 @@ void plot_drawXZ(int x,int y,int dx,int dy, dot[] D)    // Draw ellips
 }
 
 //////////////////////////////////
+void plot_pointXY(int x,int y,int dx,int dy, dot D)    // point-Draw ellips
+{
+   stroke(#ff2400);
+   line(D.x/scale+x+dx/2,D.y/scale+y+dy/2,D.x/scale+x+dx/2,D.y/scale+y+dy/2);
+}
+
+//////////////////////////////////
+void plot_pointXZ(int x,int y,int dx,int dy, dot D)    // point-Draw ellips
+{
+   stroke(#ff2400);
+   line(D.x/scale+x+dx/2,D.z/scale+y+dy/2,D.x/scale+x+dx/2,D.z/scale+y+dy/2);
+}
+
+//////////////////////////////////
 void restart()         //refresh canvas
 {
+t = 0;  
+  
 background(0x735184);
 plot_grid(250,10,280,280);   //grid XY 1 
 plot_grid(250,300,280,280);   //grid XZ 1  
