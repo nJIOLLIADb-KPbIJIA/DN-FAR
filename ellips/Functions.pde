@@ -47,6 +47,7 @@ void restart()         //refresh canvas
 t = 0;  
   
 background(0x735184);
+
 plot_grid(250,10,280,280);   //grid XY 1 
 plot_grid(250,300,280,280);   //grid XZ 1  
 
@@ -72,3 +73,9 @@ dot[] create_ellips(track T)    //return array of dots for THE Track
 }
 
 //////////////////////////////////
+void plot_circul(float x,float y,float dx,float dy)
+{
+  float R = 6370;
+  stroke(#ff2400);
+  ellipse(x+dx/2,y+dy/2,R/scale,R/scale);
+}

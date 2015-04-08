@@ -1,8 +1,10 @@
 float t = 0;                    // Time var
 float mu = 398600;            //Gravity cnt
-float scale = 1;              //scale for plot
+float scale = 100;              //scale for plot
 track realBR = new track();   //Class of track
+track newBR = new track();
 dot[] dots = new dot[314];    //array of dots
+dot[] dots_new = new dot[314];
 
 void setup()
 {
@@ -12,7 +14,11 @@ void setup()
 
 void draw()
 {
-  text("T(minut)= "+2*3.14*sqrt(realBR.a*realBR.a*realBR.a/mu)/60,10,30);        // Period
+  fill(#735184);
+  rect(5,10,200,30);
+  fill(0);
+  text("T(minut)= "+2*3.1415*sqrt(realBR.a*realBR.a*realBR.a/mu)/60,10,30);        // Period
+  
   if (millis()%100>20)
   {t = t+float(millis()%100)/1000; }
   
@@ -28,11 +34,33 @@ void draw()
   realBR.Om=float(s4)*3.14/180;
   scale = float(s5);scale = float(s5);
   
+//plot_circul(250,10,280,280);
+//plot_circul(250,300,280,280);
+//plot_circul(550,10,280,280);
+//plot_circul(550,300,280,280);
+//plot_circul(850,10,280,280);
+//plot_circul(850,300,280,280);
+  
   plot_drawXY(250,10,280,280,dots);
   plot_drawXZ(250,300,280,280,dots);
+  
   plot_pointXY(550,10,280,280,realBR.now(t));
   plot_pointXZ(550,300,280,280,realBR.now(t));
+  
+  dots_new = create_ellips(newBR);
+  plot_drawXY(850,10,280,280,dots_new);
+  plot_drawXZ(850,300,280,280,dots_new);
 
+
+      //test
+  fill(#735184);
+  rect(5,400,200,90);
+  fill(0);
+  newBR.restore(realBR.now(t),realBR.now(t-0.01),0.01);
+  text("a= "+newBR.a,20,420);
+  text("p= "+newBR.p,20,440);
+  text("i= "+newBR.i*180/3.1415,20,460);
+  text("Om= "+newBR.Om*180/3.1415,20,480);
 }
 
 
