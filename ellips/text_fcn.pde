@@ -12,7 +12,7 @@ boolean sb5 = false;
 
 String entertext(String s)        //Function for entering text
 {
-     if ((key>='0')&&(key<='9')&&(s.length()<4)||(key==46))
+     if ((key>='0')&&(key<='9')&&(s.length()<4)||(key==46)||(key=='-'))
     {
     s+=key;
     }

@@ -20,7 +20,7 @@ void draw()
   text("T(minut)= "+2*3.1415*sqrt(realBR.a*realBR.a*realBR.a/mu)/60,10,30);        // Period
   
   if (millis()%100>20)
-  {t = t+float(millis()%100)/1000; }
+  {t = t+float(millis()%50)/1000; }
   
   sb1 = textrect(50, 50,80,25,s1,sb1,"a=");    //enter parametrs
   sb2 = textrect(50, 100,80,25,s2,sb2,"p=");
@@ -33,13 +33,6 @@ void draw()
   realBR.i=float(s3)*3.14/180;
   realBR.Om=float(s4)*3.14/180;
   scale = float(s5);scale = float(s5);
-  
-//plot_circul(250,10,280,280);
-//plot_circul(250,300,280,280);
-//plot_circul(550,10,280,280);
-//plot_circul(550,300,280,280);
-//plot_circul(850,10,280,280);
-//plot_circul(850,300,280,280);
   
   plot_drawXY(250,10,280,280,dots);
   plot_drawXZ(250,300,280,280,dots);
@@ -54,13 +47,20 @@ void draw()
 
       //test
   fill(#735184);
-  rect(5,400,200,90);
+  rect(5,400,200,130);
+  rect(7,599,260,-18);
   fill(0);
-  newBR.restore(realBR.now(t),realBR.now(t-0.01),0.01);
+  
+  newBR.restore(realBR.now(t),realBR.now(t-0.01),0.01);    //Restore ellips every 0.01 second
+  
   text("a= "+newBR.a,20,420);
   text("p= "+newBR.p,20,440);
   text("i= "+newBR.i*180/3.1415,20,460);
   text("Om= "+newBR.Om*180/3.1415,20,480);
+  text("r= "+int(newBR.radiusNow(t)),20,500);
+  text("t4= "+round(realBR.timeCH(realBR.now(t-0.01),realBR.now(t),100)),20,520);
+  
+  text("HandMade by TxBr  МВТУ, ПС2-81",10,595);
 }
 
 

@@ -6,7 +6,7 @@ public class track
  public float Om;
  
  //////////////////////////////////////////////////////
- public void restore(dot d1, dot d2, float dt)
+ public void restore(dot d1, dot d2, float dt)        // Restore parametrs of ellips by 2 dots and d(time)
 {
   float mu = 398600;
   
@@ -38,8 +38,38 @@ public class track
   Om = acos(10*lx/(10*sqrt(lx*lx+ly*ly)));
 }
 
+//////////////////////////////////////////////////////
+public float timeCH(dot d1, dot d2,float R)                            //return time for time-CH by 2 dot's position
+{
+  float mu = 398600;
+  float e = sqrt(1-p/a);
+  float r1 = sqrt(d1.x*d1.x+d1.y*d1.y+d1.z*d1.z);
+  float r2 = sqrt(d2.x*d2.x+d2.y*d2.y+d2.z*d2.z);
+  
+  float teta0 = acos((a*(1-e*e)-(r1+r2)/2)/(e*(r1+r2)/2));    //angle of BR
+  float teta4 = acos((a*(1-e*e)-R)/(e*R));                    //angle of cross R
+  
+  float E0 = 2*atan((sqrt((1-e)/(1+e)))*(tan(teta0/2)));
+  float E4 = 2*atan((sqrt((1-e)/(1+e)))*(tan(teta4/2)));
+  
+  float t41 = (E0-E4-e*(sin(E0)-sin(E4)))*sqrt(a*a*a/mu);
+  float t42 = (E4-E0-e*(sin(E4)-sin(E0)))*sqrt(a*a*a/mu);
+  
+  float t4 = t42;
+  return t41;
+}
+
+//////////////////////////////////////////////////////
+public float radiusNow(float t)
+{
+ dot d = now(t);
+ float r = sqrt(d.x*d.x+d.y*d.y+d.z*d.z);
+ 
+return r; 
+}
+
 ////////////////////////////////////////////////////// 
- public dot create(float theta)
+ public dot create(float theta)        // Create dot on ellips by parametrs and angle
  {
    float e = sqrt(1-p/a);
    dot d = new dot();
@@ -54,7 +84,7 @@ public class track
  }
  
  //////////////////////////////////////////////////////
- public dot now(float t)
+ public dot now(float t)              // Create dot on elleps by parametrs and time
  {
   float mu = 398600;
   float theta = 0;
